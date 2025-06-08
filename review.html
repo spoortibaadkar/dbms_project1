@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Scores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f3;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .user-list, .score-table {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Review Page</h1>
+
+        <div class="user-list">
+            <h2>Users who attempted the quiz:</h2>
+            <ul>
+                {% for user in users %}
+                    <li>{{ user }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="score-table">
+            <h2>Score Records:</h2>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <tr>
+                    <th>Username</th>
+                    <th>Score</th>
+                    <th>Total</th>
+                </tr>
+                {% for s in scores %}
+                <tr>
+                    <td>{{ s.username }}</td>
+                    <td>{{ s.score }}</td>
+                    <td>{{ s.total }}</td>
+                </tr>
+                {% endfor %}
+            </table><a href="{{ url_for('index') }}"><button>Go Back to Start</button></a>
+
+        </div>
+    </div>
+</body>
+</html>

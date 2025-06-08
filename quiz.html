@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        let timeLeft = 60; // seconds
+        function countdown() {
+            if (timeLeft <= 0) {
+                document.getElementById("quizForm").submit();
+            } else {
+                document.getElementById("timer").innerHTML = timeLeft + "s";
+                timeLeft--;
+                setTimeout(countdown, 1000);
+            }
+        }
+
+        window.onload = countdown;
+    </script>
+</head>
+<body>
+    <div class="quiz-box">
+        <h2>Time Left: <span id="timer"></span></h2>
+        <form action="/submit" method="post" id="quizForm">
+            {% for q in questions %}
+                <div class="question">
+                    <p><strong>{{ loop.index }}. {{ q.question }}</strong></p>
+                    {% for option in q.options %}
+                        <label><input type="radio" name="{{ q.id }}" value="{{ option }}" required> {{ option }}</label><br>
+                    {% endfor %}
+                </div>
+                <progress value="{{ loop.index }}" max="{{ questions|length }}"></progress>
+                <br><br>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

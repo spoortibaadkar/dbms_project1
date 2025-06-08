@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your Score: {{ score }} / {{ total }}</h1>
+        <h2>Review Answers</h2>
+        <ul>
+            {% for res in results %}
+                <li>
+                    <b>{{ res.question }}</b><br>
+                    Your Answer: {{ res.user_answer }}<br>
+                    Correct Answer: {{ res.correct_answer }}<br>
+                    {% if res.is_correct %}
+                        ✅ Correct
+                    {% else %}
+                        ❌ Incorrect
+                    {% endif %}
+                </li><hr>
+            {% endfor %}
+        </ul>
+        <a href="/review">View All Scores</a>
+        <a href="{{ url_for('quiz') }}"><button>Go Back to Quiz</button></a>
+    </div>
+</body>
+</html>
